@@ -1,0 +1,67 @@
+version: '3'
+
+networks:
+  inception_amugnier:
+    driver: bridge
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: '/home/amugnier/data/wordpress'
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: '/home/amugnier/data/mariadb'
+
+services:
+  mariadb:
+    container_name: mariadb
+    networks:
+      - inception_amugnier
+    build:
+      context: requierements/mariadb
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+    expose:
+      - "3306"
+
+  nginx:
+    container_name: nginx
+    networks:
+      - inception_amugnier
+    depends_on:
+      - wordpress
+    build:
+      context: requierements/nginx
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "443:443"
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception_amugnier
+    build:
+      context: requierements/wordpress
+      dockerfile: Dockerfile
+    depends_on:
+      - mariadb
+    restart: always
+    expose:
+      - "9000"
+
