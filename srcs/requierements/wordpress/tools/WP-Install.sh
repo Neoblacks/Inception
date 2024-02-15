@@ -27,4 +27,7 @@ fi
 
 wp plugin list --allow-root
 
+chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html
+
 exec /usr/sbin/php-fpm7.4 -F

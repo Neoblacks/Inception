@@ -46,8 +46,6 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
 
 COPY tools/WP-Install.sh /usr/local/bin/WP-Install.sh
 RUN chmod 755 /usr/local/bin/WP-Install.sh

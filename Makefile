@@ -14,7 +14,8 @@ fclean: stop
 
 	sudo docker system prune -af
 	sudo docker volume prune -af
-	sudo docker volume rm minecraft wordpress
-	sudo rm -rf /home/wmessmer/data
+	sudo docker volume rm wordpress
+	sudo docker volume rm mariadb
+	sudo rm -rf /home/amugnier/data
 
 re:	fclean all
