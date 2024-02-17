@@ -31,6 +31,7 @@ RUN apt-get install -y \
     php7.4 \
     php-fpm \
     php-mysql \
+    vim \
     mariadb-client
 
 RUN mkdir -p /run/php/

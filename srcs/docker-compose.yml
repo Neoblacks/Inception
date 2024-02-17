@@ -1,8 +1,7 @@
 version: '3'
 
 networks:
-  inception_amugnier:
-    driver: bridge
+  default:
 
 volumes:
   wordpress:
@@ -24,7 +23,7 @@ services:
   mariadb:
     container_name: mariadb
     networks:
-      - inception_amugnier
+      - default
     build:
       context: requierements/mariadb
       dockerfile: Dockerfile
@@ -38,13 +37,15 @@ services:
   nginx:
     container_name: nginx
     networks:
-      - inception_amugnier
+      - default
     depends_on:
       - wordpress
     build:
       context: requierements/nginx
       dockerfile: Dockerfile
     env_file: .env
+    volumes:
+      - wordpress:/var/www/html
     ports:
       - "443:443"
     restart: always
@@ -53,9 +54,9 @@ services:
     container_name: wordpress
     env_file: .env
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www/html
     networks:
-      - inception_amugnier
+      - default
     build:
       context: requierements/wordpress
       dockerfile: Dockerfile

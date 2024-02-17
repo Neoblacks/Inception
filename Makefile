@@ -5,7 +5,8 @@ all:
 	sudo chmod 777 /home/amugnier/data/wordpress
 	sudo chmod 777 /home/amugnier/data/mariadb
 
-	sudo docker-compose -f ./srcs/docker-compose.yml up --build -d
+	sudo docker-compose -f ./srcs/docker-compose.yml build --no-cache
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d
 
 stop:
 	sudo docker-compose -f ./srcs/docker-compose.yml down

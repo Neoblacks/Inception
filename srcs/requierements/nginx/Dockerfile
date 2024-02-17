@@ -3,9 +3,9 @@ FROM debian:bullseye
 #INSTALL NGINX
 RUN apt update \
 && apt install vim -y \
-&& apt install wget -y \
-&& apt install curl -y \
-&& apt install nginx -y \
+	wget \
+	curl \
+	nginx \
 && echo "\033[1;32mVIM, CURL, WGET NGINX success install ! \033[0m"
 
 RUN mkdir -p /etc/nginx/ssl \
