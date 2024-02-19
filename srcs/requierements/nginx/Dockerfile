@@ -2,14 +2,14 @@ FROM debian:bullseye
 
 #INSTALL NGINX
 RUN apt update \
-&& apt install vim -y \
+&& apt install vim --no-install-recommends --no-install-suggests -y \
 	wget \
 	curl \
 	nginx \
 && echo "\033[1;32mVIM, CURL, WGET NGINX success install ! \033[0m"
 
 RUN mkdir -p /etc/nginx/ssl \
-&& apt install openssl -y \
+&& apt install openssl --no-install-recommends --no-install-suggests -y \
 && echo "\033[1;32mOpenSSL success install ! \033[0m"
 
 # -x509		= type of certif

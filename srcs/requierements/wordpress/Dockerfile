@@ -25,14 +25,15 @@ FROM debian:bullseye
 
 # WORKDIR /var/www/html
 
-RUN apt update -y && apt upgrade -y && apt-get -y install wget
+RUN apt update -y && apt upgrade -y && apt-get -y --no-install-recommends --no-install-suggests install wget
 
-RUN apt-get install -y \
+RUN apt-get install -y --no-install-recommends --no-install-suggests \
     php7.4 \
     php-fpm \
     php-mysql \
     vim \
-    mariadb-client
+    mariadb-client \
+    ca-certificates
 
 RUN mkdir -p /run/php/
 
@@ -50,6 +51,7 @@ RUN mkdir -p /var/www/html
 
 COPY tools/WP-Install.sh /usr/local/bin/WP-Install.sh
 RUN chmod 755 /usr/local/bin/WP-Install.sh
+
 
 WORKDIR /var/www/html
 

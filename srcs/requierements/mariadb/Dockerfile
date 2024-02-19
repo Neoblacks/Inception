@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt update \
 && apt upgrade -y \
-&& apt install mariadb-server -y \
+&& apt install mariadb-server --no-install-recommends --no-install-suggests -y \
 && echo "\033[1;32m MARIADB success install ! \033[0m"
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
